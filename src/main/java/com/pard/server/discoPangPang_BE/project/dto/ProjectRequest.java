@@ -1,34 +1,40 @@
 package com.pard.server.discoPangPang_BE.project.dto;
 
+import jakarta.persistence.Column;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 public class ProjectRequest {
 
 
+
     @Getter
-    @Setter
+    @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-        public class TagGroupRequest {
-            private Long projectId;
-            private List<LabelDto> tags;
+    public static class ProjectCreateRequest {
+        private Long userId;
+        private String projectName;//프로젝트의 이름
+        private LocalDateTime startDateTime;
+        private LocalDateTime endDateTime;
 
-        }
 
-    public static class LabelDto {
-        private String labelName;
-        private String labelCategory;
     }
 
-//    @Getter
-//    @Builder
-//    @NoArgsConstructor
-//    @AllArgsConstructor
-//    public static class BlogUpdateRequest {
-//        private String filename;
-//    }
-//
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ProjectUpdateRequest {
+        private String projectName;//프로젝트의 이름
+        private LocalDateTime startDateTime;
+        private LocalDateTime endDateTime;
+
+
+    }
+
+
+
 }

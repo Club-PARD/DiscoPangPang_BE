@@ -7,19 +7,6 @@ public class StarRequest {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class StarCreateRequest {
-        private Long projectId;
-        private String s;
-        private String t;
-        private String a;
-        private String r;
-        private String l;
-    }
-
-    @Getter
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
     public static class StarUpdateRequest {
         private String s;
         private String t;

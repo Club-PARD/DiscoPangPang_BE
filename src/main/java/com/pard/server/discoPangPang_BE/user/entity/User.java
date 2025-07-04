@@ -18,7 +18,7 @@ public class User {
     private Long id;
 
     private String name;
-    private int age;
+//    private int age;
     private String email;
 
 //    @Enumerated(EnumType.STRING)
@@ -27,10 +27,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Project> project;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Likes> likes;
-//
-    public void update(String name) {
-        this.name = name;
-    } //소셜 로그인 시 이름이 바뀌었을 경우 최신화
+
+//    public void update(String name) {
+//        this.name = name;
+//    } //소셜 로그인 시 이름이 바뀌었을 경우 최신화
 }

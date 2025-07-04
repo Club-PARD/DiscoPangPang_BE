@@ -1,14 +1,11 @@
 package com.pard.server.discoPangPang_BE.star.controller;
 
 
-import com.pard.server.discoPangPang_BE.project.service.ProjectService;
+
 import com.pard.server.discoPangPang_BE.star.dto.StarRequest;
-import com.pard.server.discoPangPang_BE.star.dto.StarResponse;
-import com.pard.server.discoPangPang_BE.star.entity.Star;
 import com.pard.server.discoPangPang_BE.star.service.StarService;
-import com.pard.server.discoPangPang_BE.user.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,39 +14,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/star")
 public class StarController {
     private final StarService starService;
-    private final UserService userService;
 
-    /*새로운 star 생성*/
-    @PostMapping("/create")
-    public ResponseEntity<StarResponse.StarCreateResponse> createStar(@RequestBody StarRequest.StarCreateRequest req) {
-        Long starId = starService.createStar(req); // DB 저장은 서비스에서
-        return ResponseEntity.status(HttpStatus.CREATED).body(new StarResponse.StarCreateResponse(starId));
+
+    @Operation(summary = "Star 정보 생성 또는 수정",
+            description = "해당 projectId에 연결된 Star가 존재하면 수정하고, 없으면 새로 생성합니다.")
+    /*수정하되 만약에 없으면 생성*/
+    @PatchMapping("/{projectId}")
+    public ResponseEntity<Void> patchStar(@PathVariable Long projectId,
+                                          @RequestBody StarRequest.StarUpdateRequest req) {
+        starService.updateStar(projectId, req);
+        return ResponseEntity.ok().build();
     }
 
-//
-//    /*해당 유저의 모든 프로젝트의 제목, 마감기한, 태그 전달해주기*/
-//    @GetMapping("/user/{userId}")
-//    public ResponseEntity<List<ProjectResponse.ProjectReadResponse>> findByWriter(@PathVariable Long userId) {
-//        return ResponseEntity.ok(projectService.findByWriter(userId));
-//    }
-//
-//    /*해당하는 프로젝트를 출력하기*/
-//    @GetMapping("")
-//
-//
-    @PatchMapping("/{starId}")
-    public ResponseEntity<Void> patchStar(@PathVariable Long starId,
-                         @RequestBody StarRequest.StarUpdateRequest req) {
-        starService.updateStar(starId, req);
-        return ResponseEntity.noContent().build();
-    }
-//
-//    @DeleteMapping("/{projectId}")
-//    public ResponseEntity<Void> deleteProject(@PathVariable Long projectId,
-//                          @AuthenticationPrincipal OAuth2User oauth2User) {
-//        String email = oauth2User.getAttribute("email");
-//        Long userId = userService.findByEmail(email).getId();
-//        projectService.deleteProject(projectId, userId);
-//        return ResponseEntity.noContent().build();
-//    }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,37 +22,48 @@ public class StarService {
     private final ProjectRepo projectRepo;
     private final StarRepo starRepo;
 
-    public Long createStar(StarRequest.StarCreateRequest req) {
-        Project project = projectRepo.findById(req.getProjectId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 프로젝트가 존재하지 않습니다."));
+    /*create 안 쓰고 update에서 create 까지 다 할거임*/
+//    public Long createStar(StarRequest.StarCreateRequest req) {
+//        Project project = projectRepo.findById(req.getProjectId())
+//                .orElseThrow(() -> new IllegalArgumentException("해당 프로젝트가 존재하지 않습니다."));
+//
+//        Star star = Star.builder()
+//                .s(req.getS())
+//                .t(req.getT())
+//                .a(req.getA())
+//                .r(req.getR())
+//                .l(req.getL())
+//                .project(project)
+//                .build();
+//
+//        starRepo.save(star);
+//        return star.getId();
+//    }
 
-        Star star = Star.builder()
-                .s(req.getS())
-                .t(req.getT())
-                .a(req.getA())
-                .r(req.getR())
-                .l(req.getL())
-                .project(project)
-                .build();
-
-        starRepo.save(star);
-        return star.getId();
-    }
 
     @Transactional
-    public void updateStar(Long starId, StarRequest.StarUpdateRequest req) {
-        Star star = starRepo.findById(starId)
-                .orElseThrow(() -> new RuntimeException("생성된 star 구조 없음"));
+    public void updateStar(Long projectId, StarRequest.StarUpdateRequest req) {
+        Project project = projectRepo.findById(projectId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 프로젝트가 존재하지 않습니다."));
 
+        Optional<Star> optionalStar = starRepo.findByProjectId(projectId);
 
-        // 값 수정
-        star.setS(req.getS());
-        star.setT(req.getT());
-        star.setA(req.getA());
-        star.setR(req.getR());
-        star.setL(req.getL());
+        if (optionalStar.isPresent()) {
+            Star star = optionalStar.get();
+            star.update(req.getS(), req.getT(), req.getA(), req.getR(), req.getL());
+        } else {
+            Star newStar = Star.builder()
+                    .s(req.getS())
+                    .t(req.getT())
+                    .a(req.getA())
+                    .r(req.getR())
+                    .l(req.getL())
+                    .project(project)
+                    .build();
+            starRepo.save(newStar);
+        }
     }
-
+}
 //
 //    public List<ProjectResponse.ProjectReadResponse> findByWriter(Long userId) {
 //        return ProjectMapper.toDtoList(projectRepo.findAllByUserId(userId));
@@ -86,4 +98,4 @@ public class StarService {
 //                .map(ProjectResponse.ProjectReadResponse::from)
 //                .toList();
 //    }
-}
+

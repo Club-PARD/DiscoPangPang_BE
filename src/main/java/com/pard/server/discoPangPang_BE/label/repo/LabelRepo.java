@@ -9,5 +9,4 @@ import java.util.Optional;
 
 public interface LabelRepo extends JpaRepository<Label, Long> {
     Optional<Label> findByLabelNameAndLabelCategory(String tagName, String tagCategory);
-
 }

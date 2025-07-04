@@ -23,7 +23,7 @@ public class LabelController {
 
     @PostMapping("/project/tag")
     public ResponseEntity<Void> addLabels(@RequestBody LabelRequest request) {
-        labelService.addLabelsToProject(request);
+        labelService.updateProjectLabels(request);
         return ResponseEntity.ok().build();
     }
 
