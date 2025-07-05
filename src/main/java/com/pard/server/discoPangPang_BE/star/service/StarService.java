@@ -68,34 +68,5 @@ public class StarService {
 //    public List<ProjectResponse.ProjectReadResponse> findByWriter(Long userId) {
 //        return ProjectMapper.toDtoList(projectRepo.findAllByUserId(userId));
 //    }
-//
-//    @Transactional
-//    public void updateProject(Long projectId, ProejctRequest.ProjectUpdateRequest req, Long userId) {
-//        Project project = projectRepo.findById(projectId)
-//                .orElseThrow(() -> new RuntimeException("블로그 없음"));
-//        if (!project.getUser().getId().equals(userId)) {
-//            throw new RuntimeException("작성자만 수정 가능");
-//        }
-//        project.updateFilename(req.getFilename());
-//
-//        if (req.getFilename() != null) {
-//            project.updateFilename(req.getFilename());
-//        }
-//    }
-//
-//    public void deleteProject(Long projectId, Long userId) {
-//        Project project = projectRepo.findById(projectId)
-//                .orElseThrow(() -> new RuntimeException("블로그 없음"));
-//        if (!project.getUser().getId().equals(userId)) {
-//            throw new RuntimeException("작성자만 삭제 가능");
-//        }
-//        projectRepo.delete(project);
-//    }
-//
-//    public List<ProjectResponse.ProjectReadResponse> readAllProjects() {
-//        List<Project> projects = projectRepo.findAll();
-//        return projects.stream()
-//                .map(ProjectResponse.ProjectReadResponse::from)
-//                .toList();
-//    }
+
 

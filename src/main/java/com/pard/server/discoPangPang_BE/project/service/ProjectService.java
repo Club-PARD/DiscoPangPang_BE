@@ -2,9 +2,12 @@ package com.pard.server.discoPangPang_BE.project.service;
 
 
 
+import com.pard.server.discoPangPang_BE.label.dto.LabelRequest;
+import com.pard.server.discoPangPang_BE.label.entity.Label;
 import com.pard.server.discoPangPang_BE.project.dto.ProjectRequest;
 import com.pard.server.discoPangPang_BE.project.dto.ProjectResponse;
 import com.pard.server.discoPangPang_BE.project.entity.Project;
+import com.pard.server.discoPangPang_BE.project.entity.ProjectTag;
 import com.pard.server.discoPangPang_BE.project.repo.ProjectRepo;
 import com.pard.server.discoPangPang_BE.user.entity.User;
 import com.pard.server.discoPangPang_BE.user.repo.UserRepo;
@@ -33,6 +36,7 @@ public class ProjectService {
                 .build();
 
         projectRepo.save(project);
+
     }
 
 

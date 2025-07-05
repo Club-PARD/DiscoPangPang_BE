@@ -1,10 +1,7 @@
 package com.pard.server.discoPangPang_BE.project.dto;
 
-import jakarta.persistence.Column;
 import lombok.*;
-
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class ProjectRequest {
 

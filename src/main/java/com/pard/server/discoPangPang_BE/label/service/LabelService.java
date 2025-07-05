@@ -5,8 +5,10 @@ package com.pard.server.discoPangPang_BE.label.service;
 
 
 import com.pard.server.discoPangPang_BE.label.dto.LabelRequest;
+import com.pard.server.discoPangPang_BE.label.dto.LabelResponse;
 import com.pard.server.discoPangPang_BE.label.entity.Label;
 import com.pard.server.discoPangPang_BE.label.repo.LabelRepo;
+import com.pard.server.discoPangPang_BE.project.dto.ProjectResponse;
 import com.pard.server.discoPangPang_BE.project.entity.Project;
 import com.pard.server.discoPangPang_BE.project.entity.ProjectTag;
 import com.pard.server.discoPangPang_BE.project.repo.ProjectRepo;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,25 +29,43 @@ public class LabelService {
 
     @Transactional
     public void updateProjectLabels(LabelRequest req) {
+        // 1. 유효한 태그만 필터링 (labelName이나 labelCategory가 "null"이면 제외)
+        List<LabelRequest.LabelDto> validLabels = req.getLabels().stream()
+                .filter(dto -> dto.getLabelName() != null && dto.getLabelCategory() != null)
+                .filter(dto -> !dto.getLabelName().equalsIgnoreCase("null"))
+                .filter(dto -> !dto.getLabelCategory().equalsIgnoreCase("null"))
+                .toList();
+
+        // 2. 최대 4개 체크
+        if (validLabels.size() > 4) {
+            throw new IllegalArgumentException("최대 4개의 태그만 선택할 수 있습니다.");
+        }
+
+        // 3. 프로젝트 확인
         Project project = projectRepo.findById(req.getProjectId())
                 .orElseThrow(() -> new IllegalArgumentException("프로젝트가 존재하지 않습니다."));
 
-        // 1. 기존 태그 연결 삭제
-        projectTagRepo.deleteByProject(project); // 모든 연결 제거
+        // 4. 기존 태그 제거
+        projectTagRepo.deleteByProject(project);
 
-        // 2. 새로운 태그 연결
-        // ':'의 의미 : "req.getLabels() 안에 있는 값을 하나씩 labelDto에 넣으면서 반복해라."
-        for (LabelRequest.LabelDto labelDto : req.getLabels()) {
-            String labelName = labelDto.getLabelName();
-            String labelCategory = labelDto.getLabelCategory();
-
-            // 라벨이 존재하지 않으면 생성
-            Label label = labelRepo.findByLabelNameAndLabelCategory(labelName, labelCategory)
-                    .orElseGet(() -> labelRepo.save(new Label(labelName, labelCategory)));
-
-            // ProjectTag 새로 저장
+        // 5. 새 태그 연결
+        for (LabelRequest.LabelDto dto : validLabels) {
+            Label label = labelRepo.findByLabelNameAndLabelCategory(dto.getLabelName(), dto.getLabelCategory())
+                    .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 태그입니다: " + dto.getLabelName()));
             projectTagRepo.save(new ProjectTag(project, label));
         }
+    }
+
+
+
+    public List<LabelResponse> findByProject(Long projectId) {
+        return labelRepo.findAllByProjectId(projectId).stream()
+                .map(label -> LabelResponse.builder()
+                        .labelName(label.getLabelName())
+                .labelCategory(label.getLabelCategory())
+
+                        .build())
+                .collect(Collectors.toList());
     }
 
 
