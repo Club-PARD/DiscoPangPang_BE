@@ -19,7 +19,7 @@ public class CorsConfig {//요청의 종류, 정책을 정하는 파트
 
         config.setAllowCredentials(true);//모든 출처를 허용
 
-        config.addAllowedOrigin("*");
+        config.addAllowedOrigin("http://localhost:3000");
 
         config.addAllowedHeader("*");
 
