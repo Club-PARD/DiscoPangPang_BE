@@ -28,7 +28,7 @@ public class LabelController {
 
     /*해당 프로젝트의 모든 프로젝트의 제목, 마감기한, 태그 전달해주기*/
     @GetMapping("/project/{projectId}")
-    public ResponseEntity<List<LabelResponse>> findByProject(@PathVariable Long projectId) {
+    public ResponseEntity<List<LabelResponse.LabelNameResponse>> findByProject(@PathVariable Long projectId) {
         return ResponseEntity.ok(labelService.findByProject(projectId));
     }
 

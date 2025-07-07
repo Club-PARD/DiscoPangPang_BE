@@ -28,7 +28,7 @@ public class UserService {
         User user = User.builder()
                 .name(req.getName())
                 .email(req.getEmail())
-                .project(new ArrayList<>())
+//                .project(new ArrayList<>())
 //                .role(Role.USER)
                 .build();
 

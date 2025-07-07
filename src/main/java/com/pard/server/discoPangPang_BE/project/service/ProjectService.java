@@ -2,12 +2,9 @@ package com.pard.server.discoPangPang_BE.project.service;
 
 
 
-import com.pard.server.discoPangPang_BE.label.dto.LabelRequest;
-import com.pard.server.discoPangPang_BE.label.entity.Label;
 import com.pard.server.discoPangPang_BE.project.dto.ProjectRequest;
 import com.pard.server.discoPangPang_BE.project.dto.ProjectResponse;
 import com.pard.server.discoPangPang_BE.project.entity.Project;
-import com.pard.server.discoPangPang_BE.project.entity.ProjectTag;
 import com.pard.server.discoPangPang_BE.project.repo.ProjectRepo;
 import com.pard.server.discoPangPang_BE.user.entity.User;
 import com.pard.server.discoPangPang_BE.user.repo.UserRepo;
@@ -29,6 +26,7 @@ public class ProjectService {
                 .orElseThrow(() -> new RuntimeException("유저 없음"));
 
         Project project = Project.builder()
+                .id(req.getProjectId().toString())
                 .projectName(req.getProjectName())               // 필드 이름에 맞게 수정
                 .startDateTime(req.getStartDateTime())           // @Column(nullable = false) 대응
                 .endDateTime(req.getEndDateTime())               // @Column(nullable = false)
@@ -53,7 +51,7 @@ public class ProjectService {
     }
 
     @Transactional
-    public void updateProject(Long projectId, ProjectRequest.ProjectUpdateRequest req, Long userId) {
+    public void updateProject(String projectId, ProjectRequest.ProjectUpdateRequest req, Long userId) {
         Project project = projectRepo.findById(projectId)
                 .orElseThrow(() -> new RuntimeException("블로그 없음"));
 
@@ -64,7 +62,7 @@ public class ProjectService {
         project.update(req);
     }
 
-    public void deleteProject(Long projectId, Long userId) {
+    public void deleteProject(String projectId, Long userId) {
         Project project = projectRepo.findById(projectId)
                 .orElseThrow(() -> new RuntimeException("블로그 없음"));
         if (!project.getUser().getId().equals(userId)) {

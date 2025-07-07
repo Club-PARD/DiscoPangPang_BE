@@ -9,26 +9,20 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.UUID;
 
 
 @Entity
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Project {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;//primary key
+    @Column(length = 36)
+    private String id;
 
-    private String projectName;//프로젝트의 이름
-//    private String insight;//인사이트를 기록할 수 있는 변수
-
-//    @Column(nullable = false)
-//    private String status;// 프로그램의 상태를 나타내주는 변수 예) not_started, in_progress, answering, completed
-//    /*하드 코딩하지 않기 -> 추후에 수정 예정*/
-
+    private String projectName;
 
     @Column(name = "start_date_time", nullable = false)
     private LocalDateTime startDateTime;
@@ -36,11 +30,9 @@ public class Project {
     @Column(name = "end_date_time", nullable = false)
     private LocalDateTime endDateTime;
 
-
-    @ManyToOne(fetch = FetchType.LAZY) //earger 방식이 아닌 lazy 방식
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProjectTag> projectTags = new ArrayList<>();
@@ -48,7 +40,7 @@ public class Project {
     @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private Star star;
 
-
+    // ✅ update 메서드
     public void update(ProjectRequest.ProjectUpdateRequest req) {
         if (req.getProjectName() != null) {
             this.projectName = req.getProjectName();
@@ -61,10 +53,16 @@ public class Project {
         }
     }
 
-
-
-
+    @Builder
+    public Project(String id, String projectName, LocalDateTime startDateTime, LocalDateTime endDateTime, User user) {
+        this.id = id;
+        this.projectName = projectName;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.user = user;
+    }
 }
+
 
 
 

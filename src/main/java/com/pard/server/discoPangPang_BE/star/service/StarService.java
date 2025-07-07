@@ -42,7 +42,7 @@ public class StarService {
 
 
     @Transactional
-    public void updateStar(Long projectId, StarRequest.StarUpdateRequest req) {
+    public void updateStar(String projectId, StarRequest.StarUpdateRequest req) {
         Project project = projectRepo.findById(projectId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 프로젝트가 존재하지 않습니다."));
 
@@ -64,9 +64,6 @@ public class StarService {
         }
     }
 }
-//
-//    public List<ProjectResponse.ProjectReadResponse> findByWriter(Long userId) {
-//        return ProjectMapper.toDtoList(projectRepo.findAllByUserId(userId));
-//    }
+
 
 

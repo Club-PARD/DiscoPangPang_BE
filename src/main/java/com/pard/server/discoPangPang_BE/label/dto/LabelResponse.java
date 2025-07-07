@@ -14,7 +14,17 @@ import java.util.List;
 @AllArgsConstructor
 public class LabelResponse {
     private String labelName;
-    private String labelCategory; // 태그 이름 리스트
+    private String labelCategory;
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class LabelNameResponse {
+        private String labelName;
+    }
+
+
 }
 
 

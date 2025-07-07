@@ -20,7 +20,7 @@ public class StarController {
             description = "해당 projectId에 연결된 Star가 존재하면 수정하고, 없으면 새로 생성합니다.")
     /*수정하되 만약에 없으면 생성*/
     @PatchMapping("/{projectId}")
-    public ResponseEntity<Void> patchStar(@PathVariable Long projectId,
+    public ResponseEntity<Void> patchStar(@PathVariable String projectId,
                                           @RequestBody StarRequest.StarUpdateRequest req) {
         starService.updateStar(projectId, req);
         return ResponseEntity.ok().build();

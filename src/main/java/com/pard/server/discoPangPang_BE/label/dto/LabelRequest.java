@@ -3,6 +3,7 @@ package com.pard.server.discoPangPang_BE.label.dto;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -10,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class LabelRequest {
 
-    private Long projectId;
+    private String projectId;
     private List<LabelDto> labels;
 
     @Getter

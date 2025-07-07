@@ -33,7 +33,7 @@ public class ProjectController {
     }
 
     @PatchMapping("/{projectId}")
-    public ResponseEntity<Void> patchProject(@PathVariable Long projectId,
+    public ResponseEntity<Void> patchProject(@PathVariable String projectId,
                          @RequestBody ProjectRequest.ProjectUpdateRequest req,
                                              @RequestParam Long userId)
     {
@@ -42,7 +42,7 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{projectId}")
-    public ResponseEntity<Void> deleteProject(@PathVariable Long projectId,
+    public ResponseEntity<Void> deleteProject(@PathVariable String projectId,
                          @RequestParam Long userId) {
 
         projectService.deleteProject(projectId, userId);

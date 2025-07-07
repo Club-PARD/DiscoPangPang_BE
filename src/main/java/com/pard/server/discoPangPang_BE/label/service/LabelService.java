@@ -42,7 +42,8 @@ public class LabelService {
         }
 
         // 3. 프로젝트 확인
-        Project project = projectRepo.findById(req.getProjectId())
+        String projectId = req.getProjectId();
+        Project project = projectRepo.findById(projectId)
                 .orElseThrow(() -> new IllegalArgumentException("프로젝트가 존재하지 않습니다."));
 
         // 4. 기존 태그 제거
@@ -58,12 +59,10 @@ public class LabelService {
 
 
 
-    public List<LabelResponse> findByProject(Long projectId) {
+    public List<LabelResponse.LabelNameResponse> findByProject(Long projectId) {
         return labelRepo.findAllByProjectId(projectId).stream()
-                .map(label -> LabelResponse.builder()
+                .map(label -> LabelResponse.LabelNameResponse.builder()
                         .labelName(label.getLabelName())
-                .labelCategory(label.getLabelCategory())
-
                         .build())
                 .collect(Collectors.toList());
     }
