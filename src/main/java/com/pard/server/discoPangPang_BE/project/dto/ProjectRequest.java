@@ -27,6 +27,7 @@ public class ProjectRequest {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ProjectUpdateRequest {
+        private UUID projectId;
         private String projectName;//프로젝트의 이름
         private LocalDateTime startDateTime;
         private LocalDateTime endDateTime;

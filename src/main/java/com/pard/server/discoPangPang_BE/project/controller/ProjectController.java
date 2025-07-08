@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,16 +34,15 @@ public class ProjectController {
     }
 
     @PatchMapping("/{projectId}")
-    public ResponseEntity<Void> patchProject(@PathVariable String projectId,
+    public ResponseEntity<Void> patchProject(@PathVariable UUID projectId,
                          @RequestBody ProjectRequest.ProjectUpdateRequest req,
-                                             @RequestParam Long userId)
-    {
+                                             @RequestParam Long userId) {
         projectService.updateProject(projectId, req, userId);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{projectId}")
-    public ResponseEntity<Void> deleteProject(@PathVariable String projectId,
+    public ResponseEntity<Void> deleteProject(@PathVariable UUID projectId,
                          @RequestParam Long userId) {
 
         projectService.deleteProject(projectId, userId);

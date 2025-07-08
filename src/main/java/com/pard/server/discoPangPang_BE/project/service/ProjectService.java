@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,8 +52,8 @@ public class ProjectService {
     }
 
     @Transactional
-    public void updateProject(String projectId, ProjectRequest.ProjectUpdateRequest req, Long userId) {
-        Project project = projectRepo.findById(projectId)
+    public void updateProject(UUID projectId, ProjectRequest.ProjectUpdateRequest req, Long userId) {
+        Project project = projectRepo.findById(projectId.toString())
                 .orElseThrow(() -> new RuntimeException("블로그 없음"));
 
         if (!project.getUser().getId().equals(userId)) {
@@ -62,8 +63,8 @@ public class ProjectService {
         project.update(req);
     }
 
-    public void deleteProject(String projectId, Long userId) {
-        Project project = projectRepo.findById(projectId)
+    public void deleteProject(UUID projectId, Long userId) {
+        Project project = projectRepo.findById(projectId.toString())
                 .orElseThrow(() -> new RuntimeException("블로그 없음"));
         if (!project.getUser().getId().equals(userId)) {
             throw new RuntimeException("작성자만 삭제 가능");
