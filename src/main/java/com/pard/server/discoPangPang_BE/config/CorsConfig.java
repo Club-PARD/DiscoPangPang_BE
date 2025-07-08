@@ -19,13 +19,13 @@ public class CorsConfig {//요청의 종류, 정책을 정하는 파트
 
         config.setAllowCredentials(true);//모든 출처를 허용
 
-        config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedOrigin("*");
 
         config.addAllowedHeader("*");
 
         config.addAllowedMethod("*");
 
-        source.registerCorsConfiguration("/*", config);
+        source.registerCorsConfiguration("/**", config);
 
         return new CorsFilter(source); //필터링, 우리 서버에 들어오기 위해서는 우리의 정책을 따라야해!
         //그 따라하는 정책을 반환
