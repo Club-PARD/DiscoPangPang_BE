@@ -5,6 +5,7 @@ import com.pard.server.discoPangPang_BE.label.dto.LabelRequest;
 import com.pard.server.discoPangPang_BE.label.dto.LabelResponse;
 import com.pard.server.discoPangPang_BE.label.service.LabelService;
 import com.pard.server.discoPangPang_BE.project.service.ProjectService;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,8 @@ public class LabelController {
 
     /*해당 프로젝트의 모든 프로젝트의 제목, 마감기한, 태그 전달해주기*/
     @GetMapping("/project/{projectId}")
-    public ResponseEntity<List<LabelResponse.LabelNameResponse>> findByProject(@PathVariable UUID projectId) {
+    public ResponseEntity<List<LabelResponse.LabelNameResponse>> findByProject(@Parameter(description = "UUID of the project", example = "3fa85f64-5717-4562-b3fc-2c963f66afa6")
+                                                                                   @PathVariable UUID projectId) {
         return ResponseEntity.ok(labelService.findByProject(projectId));
     }
 
