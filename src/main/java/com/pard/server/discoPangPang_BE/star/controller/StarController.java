@@ -2,12 +2,17 @@ package com.pard.server.discoPangPang_BE.star.controller;
 
 
 
+import com.pard.server.discoPangPang_BE.project.dto.ProjectResponse;
 import com.pard.server.discoPangPang_BE.star.dto.StarRequest;
+import com.pard.server.discoPangPang_BE.star.dto.StarResponse;
 import com.pard.server.discoPangPang_BE.star.service.StarService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,5 +30,11 @@ public class StarController {
         starService.updateStar(projectId, req);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/{projectId}")
+    public ResponseEntity<List<StarResponse>> findByProject(@PathVariable UUID projectId) {
+        return ResponseEntity.ok(starService.findByProjectId(projectId));
+    }
+
 
 }

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,8 +43,8 @@ public class LabelService {
         }
 
         // 3. 프로젝트 확인
-        String projectId = req.getProjectId();
-        Project project = projectRepo.findById(projectId)
+        UUID projectId = req.getProjectId();
+        Project project = projectRepo.findById(projectId.toString())
                 .orElseThrow(() -> new IllegalArgumentException("프로젝트가 존재하지 않습니다."));
 
         // 4. 기존 태그 제거
@@ -59,15 +60,13 @@ public class LabelService {
 
 
 
-    public List<LabelResponse.LabelNameResponse> findByProject(Long projectId) {
-        return labelRepo.findAllByProjectId(projectId).stream()
+    public List<LabelResponse.LabelNameResponse> findByProject(UUID projectId) {
+        return labelRepo.findAllByProjectId(projectId.toString()).stream()
                 .map(label -> LabelResponse.LabelNameResponse.builder()
                         .labelName(label.getLabelName())
                         .build())
                 .collect(Collectors.toList());
     }
-
-
 }
 
 

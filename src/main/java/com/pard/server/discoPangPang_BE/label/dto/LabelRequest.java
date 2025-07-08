@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class LabelRequest {
 
-    private String projectId;
+    private UUID projectId;
     private List<LabelDto> labels;
 
     @Getter

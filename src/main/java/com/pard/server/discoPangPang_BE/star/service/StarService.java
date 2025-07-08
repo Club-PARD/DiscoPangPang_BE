@@ -2,9 +2,11 @@ package com.pard.server.discoPangPang_BE.star.service;
 
 
 
+import com.pard.server.discoPangPang_BE.project.dto.ProjectResponse;
 import com.pard.server.discoPangPang_BE.project.entity.Project;
 import com.pard.server.discoPangPang_BE.project.repo.ProjectRepo;
 import com.pard.server.discoPangPang_BE.star.dto.StarRequest;
+import com.pard.server.discoPangPang_BE.star.dto.StarResponse;
 import com.pard.server.discoPangPang_BE.star.entity.Star;
 import com.pard.server.discoPangPang_BE.star.repo.StarRepo;
 import com.pard.server.discoPangPang_BE.user.repo.UserRepo;
@@ -14,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -62,6 +66,19 @@ public class StarService {
                     .build();
             starRepo.save(newStar);
         }
+
+
+    }
+    public List<StarResponse> findByProjectId(UUID projectId) {
+        return starRepo.findByProjectId(projectId.toString()).stream()
+                .map(star -> StarResponse.builder()
+                        .s(star.getS())
+                        .s(star.getT())
+                        .s(star.getA())
+                        .s(star.getR())
+                        .s(star.getL())
+                        .build())
+                .collect(Collectors.toList());
     }
 }
 

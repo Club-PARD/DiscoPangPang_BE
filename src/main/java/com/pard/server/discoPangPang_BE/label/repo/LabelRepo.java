@@ -14,6 +14,6 @@ public interface LabelRepo extends JpaRepository<Label, Long> {
     Optional<Label> findByLabelNameAndLabelCategory(String tagName, String tagCategory);
 
     @Query("SELECT pt.label FROM ProjectTag pt WHERE pt.project.id = :projectId")
-    List<Label> findAllByProjectId(@Param("projectId") Long projectId);
+    List<Label> findAllByProjectId(@Param("projectId") String projectId);
 
 }
