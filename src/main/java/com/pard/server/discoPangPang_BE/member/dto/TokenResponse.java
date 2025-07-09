@@ -1,13 +1,12 @@
 package com.pard.server.discoPangPang_BE.member.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class TokenResponse {
     private String accessToken;
-
-    public TokenResponse(String token) {
-        this.accessToken = token;
-    }
-
+    private Long userId;
+//    private String email;
 }

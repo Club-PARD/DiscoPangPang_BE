@@ -28,12 +28,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PatchMapping("/{userId}")
-    public ResponseEntity<Void> patchUser(@PathVariable Long userId ,
-                                          @RequestBody UserRequest.UserUpdateRequest req) {
-        userService.updateUser(userId, req);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
+//    @PatchMapping("/{userId}")
+//    public ResponseEntity<Void> patchUser(@PathVariable Long userId ,
+//                                          @RequestBody UserRequest.UserUpdateRequest req) {
+//        userService.updateUser(userId, req);
+//        return ResponseEntity.status(HttpStatus.OK).build();
+//    }
 
 
     @DeleteMapping("/{userId}")
