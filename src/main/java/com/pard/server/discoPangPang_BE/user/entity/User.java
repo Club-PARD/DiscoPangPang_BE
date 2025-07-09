@@ -17,6 +17,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
+    private String appleSub; // Apple 고유 식별자 (sub)
+
     private String name;
 //    private int age;
     private String email;
