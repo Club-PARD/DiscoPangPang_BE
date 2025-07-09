@@ -14,7 +14,7 @@ public class ProjectRequest {
     @AllArgsConstructor
     public static class ProjectCreateRequest {
         private UUID projectId;//uuid
-        private Long userId;
+//        private Long userId;
         private String projectName;//프로젝트의 이름
         private LocalDateTime startDateTime;
         private LocalDateTime endDateTime;
@@ -27,7 +27,7 @@ public class ProjectRequest {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ProjectUpdateRequest {
-        private UUID projectId;
+//        private UUID projectId;
         private String projectName;//프로젝트의 이름
         private LocalDateTime startDateTime;
         private LocalDateTime endDateTime;

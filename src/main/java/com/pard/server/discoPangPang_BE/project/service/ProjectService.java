@@ -22,8 +22,8 @@ public class ProjectService {
     private final UserRepo userRepo;
     private final ProjectRepo projectRepo;
 
-    public void createProject(ProjectRequest.ProjectCreateRequest req) {
-        User user = userRepo.findById(req.getUserId())
+    public void createProject(Long userId , ProjectRequest.ProjectCreateRequest req) {
+        User user = userRepo.findById(userId)
                 .orElseThrow(() -> new RuntimeException("유저 없음"));
 
         Project project = Project.builder()
