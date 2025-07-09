@@ -8,12 +8,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pard.server.discoPangPang_BE.config.AppleProperties;
 import com.pard.server.discoPangPang_BE.member.dto.AppleUserInfo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.security.interfaces.RSAPublicKey;
-import java.time.Instant;
 import java.util.Base64;
 import java.util.Map;
 
@@ -43,6 +40,12 @@ public class AppleJwtValidator {
             String payload = new String(Base64.getUrlDecoder().decode(verifiedJWT.getPayload()));
             Map<String, Object> payloadMap = objectMapper.readValue(payload, Map.class);
 
+            if (identityToken == null || identityToken.trim().isEmpty()) {
+                throw new RuntimeException("⚠️ identityToken is null or empty");
+            }
+
+
+
             // aud 확인
             String aud = (String) payloadMap.get("aud");
             if (!appleProperties.getClientId().equals(aud)) {
@@ -51,8 +54,9 @@ public class AppleJwtValidator {
 
             String sub = (String) payloadMap.get("sub");
             String email = (String) payloadMap.get("email");
+            String name = (String) payloadMap.get("name");
 
-            return new AppleUserInfo(sub, email);
+            return new AppleUserInfo(sub, email, name);
 
         } catch (Exception e) {
             throw new RuntimeException("Apple 토큰 검증 실패", e);

@@ -25,13 +25,14 @@ public class MemberService {
         AppleUserInfo userInfo = appleJwtValidator.validate(request.getIdentityToken());
         String sub = userInfo.getSub();
         String email = userInfo.getEmail();
+        String name = userInfo.getName();
 
         User user = userRepo.findByAppleSub(sub)
                 .orElseGet(() -> {
                     User newUser = User.builder()
                             .appleSub(sub)
                             .email(email)
-                            .name(request.getFullName()) // request로부터 이름 받아오기
+                            .name(request.getName()) // request로부터 이름 받아오기
                             .build();
                     return userRepo.save(newUser);
                 });

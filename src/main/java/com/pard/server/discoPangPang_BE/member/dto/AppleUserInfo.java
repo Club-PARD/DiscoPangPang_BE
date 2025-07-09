@@ -9,4 +9,7 @@ import lombok.Getter;
 public class AppleUserInfo {
     private final String sub;
     private final String email; // optional
+    private final String name;
+
+
 }

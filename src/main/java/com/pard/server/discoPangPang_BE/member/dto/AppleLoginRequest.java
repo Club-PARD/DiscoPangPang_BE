@@ -8,7 +8,7 @@ import lombok.Setter;
 public class AppleLoginRequest {
     private String identityToken;
     private String email;      // 최초 로그인만 전달됨
-    private String fullName;   // 최초 로그인만 전달됨
+    private String name;   // 최초 로그인만 전달됨
 
 }
 
