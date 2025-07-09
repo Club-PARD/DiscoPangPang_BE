@@ -9,20 +9,8 @@ import com.pard.server.discoPangPang_BE.user.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 
-
-package com.pard.server.discoPangPang_BE.member.service;
-
-import com.pard.server.discoPangPang_BE.member.dto.AppleLoginRequest;
 import com.pard.server.discoPangPang_BE.member.dto.AppleUserInfo;
-import com.pard.server.discoPangPang_BE.member.util.AppleJwtValidator;
-import com.pard.server.discoPangPang_BE.user.entity.User;
-import com.pard.server.discoPangPang_BE.user.repo.UserRepo;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
