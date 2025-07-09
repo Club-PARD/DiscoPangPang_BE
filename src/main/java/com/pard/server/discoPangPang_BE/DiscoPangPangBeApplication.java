@@ -7,8 +7,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication
 @EnableConfigurationProperties(AppleProperties.class)
-public class DiscoPangPangApplication {
+public class DiscoPangPangBeApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(DiscoPangPangApplication.class, args);
+		SpringApplication.run(DiscoPangPangBeApplication.class, args);
 	}
 }
