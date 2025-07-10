@@ -46,7 +46,7 @@ public class ProjectService {
                         .projectName(project.getProjectName())
 //                        .status(project.getStatus())
                         .endDateTime(project.getEndDateTime())
-//                        .startDateTime(project.getStartDateTime())
+                        .startDateTime(project.getStartDateTime())
                         .build())
                 .collect(Collectors.toList());
     }
