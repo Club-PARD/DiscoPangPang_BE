@@ -27,7 +27,7 @@ public class ProjectResponse {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ProjectHomeResponse {
-//        private String id;//primary key
+        private String id;//primary key
         private String projectName;//프로젝트의 이름
 //        private String insight;//인사이트를 기록할 수 있는 변수
 //        private String status;// 프로그램의 상태를 나타내주는 변수 예) not_started, in_progress, answering, completed

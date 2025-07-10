@@ -43,7 +43,7 @@ public class ProjectService {
         return projectRepo.findAllByUserIdWithStar(userId)
                 .stream()
                 .map(project -> ProjectResponse.ProjectHomeResponse.builder()
-//                        .id(project.getId())
+                        .id(project.getId())
                         .projectName(project.getProjectName())
 //                        .status(project.getStatus())
                         .endDateTime(project.getEndDateTime())

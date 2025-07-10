@@ -64,6 +64,7 @@ public class LabelService {
         return labelRepo.findAllByProjectId(projectId.toString()).stream()
                 .map(label -> LabelResponse.LabelNameResponse.builder()
                         .labelName(label.getLabelName())
+                        .projectId(projectId)
                         .build())
                 .collect(Collectors.toList());
     }

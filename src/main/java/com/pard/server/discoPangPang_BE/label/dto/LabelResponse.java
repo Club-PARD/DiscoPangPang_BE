@@ -5,14 +5,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.util.UUID;
+
 
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class LabelResponse {
+
     private String labelName;
     private String labelCategory;
 
@@ -22,6 +23,7 @@ public class LabelResponse {
     @AllArgsConstructor
     public static class LabelNameResponse {
         private String labelName;
+        private UUID projectId;
     }
 
 
