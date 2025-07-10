@@ -77,6 +77,7 @@ public class StarService {
                         .s(star.getA())
                         .s(star.getR())
                         .s(star.getL())
+                        .projectId(projectId)
                         .build())
                 .collect(Collectors.toList());
     }
