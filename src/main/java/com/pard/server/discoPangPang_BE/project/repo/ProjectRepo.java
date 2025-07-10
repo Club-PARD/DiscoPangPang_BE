@@ -14,9 +14,6 @@ import java.util.UUID;
 public interface ProjectRepo extends JpaRepository<Project, String> {
 //    List<Project> findByUserIdAndStatusIn(Long userId, List<String> statusList);
 
-
-    @Query("SELECT p FROM Project p LEFT JOIN FETCH p.star WHERE p.id = :projectId")
+    @Query("SELECT p FROM Project p LEFT JOIN FETCH p.star WHERE p.user.id = :userId")
     List<Project> findAllByUserIdWithStar(@Param("userId") Long userId);
-
-
 }
