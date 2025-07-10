@@ -42,7 +42,7 @@ public class Project {
     @JsonIgnore
     private Star star;
 
-    // ✅ update 메서드
+    // update 메서드
     public void update(ProjectRequest.ProjectUpdateRequest req) {
         if (req.getProjectName() != null) {
             this.projectName = req.getProjectName();

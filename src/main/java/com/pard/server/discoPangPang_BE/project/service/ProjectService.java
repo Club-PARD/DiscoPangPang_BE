@@ -43,14 +43,14 @@ public class ProjectService {
         return projectRepo.findAllByUserIdWithStar(userId)
                 .stream()
                 .map(project -> ProjectResponse.ProjectHomeResponse.builder()
-                        .id(project.getId())
+                        .projectId(UUID.fromString(project.getId()))  // 여기에서 변환
                         .projectName(project.getProjectName())
-//                        .status(project.getStatus())
-                        .endDateTime(project.getEndDateTime())
                         .startDateTime(project.getStartDateTime())
+                        .endDateTime(project.getEndDateTime())
                         .build())
                 .collect(Collectors.toList());
     }
+
 
     @Transactional
     public void updateProject(UUID projectId, ProjectRequest.ProjectUpdateRequest req, Long userId) {
