@@ -40,7 +40,8 @@ public class ProjectService {
 
 
     public List<ProjectResponse.ProjectHomeResponse> findByWriter(Long userId) {
-        return projectRepo.findAllByUserId(userId).stream()
+        return projectRepo.findAllByUserIdWithStar(userId)
+                .stream()
                 .map(project -> ProjectResponse.ProjectHomeResponse.builder()
 //                        .id(project.getId())
                         .projectName(project.getProjectName())
