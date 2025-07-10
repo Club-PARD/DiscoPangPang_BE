@@ -1,6 +1,7 @@
 package com.pard.server.discoPangPang_BE.project.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pard.server.discoPangPang_BE.project.dto.ProjectRequest;
 import com.pard.server.discoPangPang_BE.star.entity.Star;
 import com.pard.server.discoPangPang_BE.user.entity.User;
@@ -38,6 +39,7 @@ public class Project {
     private List<ProjectTag> projectTags = new ArrayList<>();
 
     @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Star star;
 
     // ✅ update 메서드
