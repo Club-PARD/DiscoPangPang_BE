@@ -32,7 +32,7 @@ public class StarController {
     }
 
     @GetMapping("/{projectId}")
-    public ResponseEntity<List<StarResponse>> findByProject(@PathVariable UUID projectId) {
+    public ResponseEntity<StarResponse> findByProject(@PathVariable UUID projectId) {
         return ResponseEntity.ok(starService.findByProjectId(projectId));
     }
 

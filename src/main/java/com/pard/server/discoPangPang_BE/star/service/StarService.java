@@ -69,18 +69,21 @@ public class StarService {
 
 
     }
-    public List<StarResponse> findByProjectId(UUID projectId) {
-        return starRepo.findByProjectId(projectId.toString()).stream()
-                .map(star -> StarResponse.builder()
-                        .s(star.getS())
-                        .s(star.getT())
-                        .s(star.getA())
-                        .s(star.getR())
-                        .s(star.getL())
-//                        .projectId(projectId)
-                        .build())
-                .collect(Collectors.toList());
+    public StarResponse findByProjectId(UUID projectId) {
+        Star star = starRepo.findByProjectId(projectId.toString())
+                .orElseThrow(() -> new RuntimeException("해당 프로젝트에 대한 Star가 존재하지 않습니다."));
+
+
+        return StarResponse.builder()
+                .s(star.getS())
+                .t(star.getT())
+                .a(star.getA())
+                .r(star.getR())
+                .l(star.getL())
+//          .projectId(projectId.toString())
+                .build();
     }
+
 }
 
 
