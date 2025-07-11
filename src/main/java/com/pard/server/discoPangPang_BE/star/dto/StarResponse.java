@@ -14,5 +14,5 @@ public class StarResponse {
     private String a;
     private String r;
     private String l;
-    private UUID projectId;
+
 }
